@@ -1,0 +1,21 @@
+
+<md-content class="md-padding">
+
+  <h2>User Details</h2>
+
+  <form name="userForm">
+
+      <div layout-gt-sm="row">
+        <md-list-item>
+          <img ng-src="https://avatars.githubusercontent.com/{{$ctrl.selected.githubHandle}}" class="md-avatar input-avatar" />
+
+          <md-input-container class="md-block" flex>
+            <label>Name</label>
+            <input ng-model="$ctrl.selected.name">
+          </md-input-container>
+        </md-list-item>
+      </div>
+
+  </form>
+
+</md-content>  

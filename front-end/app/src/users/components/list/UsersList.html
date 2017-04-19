@@ -1,0 +1,7 @@
+
+<md-list>
+  <md-list-item ng-repeat="user in $ctrl.users" ng-click="$ctrl.showDetails({user:user})">
+    <img ng-src="https://avatars.githubusercontent.com/{{user.githubHandle}}" class="md-avatar" />
+    <span ng-class="{'selected' : user === $ctrl.selected }">{{user.name}}</span>
+  </md-list-item>
+</md-list>
