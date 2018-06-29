@@ -7,29 +7,31 @@
  * @constructor
  */
 function UsersDataService($q) {
-  var users = [
-    {
-      name: 'Juan Jaspe',
-      githubHandle: 'jjaspenextech'
-    },
-    {
-      name: 'Brandon Ripley',
-      githubHandle: 'bripley-nxtech'
-    },
-    {
-      name: 'Brad Savon',
-      githubHandle: 'bradsavon'
-    }
-  ];
+    var users = [{
+            name: 'Juan Jaspe',
+            githubHandle: 'jjaspenextech'
+        },
+        {
+            name: 'Brandon Ripley',
+            githubHandle: 'bripley-nxtech'
+        },
+        {
+            name: 'Brad Savon',
+            githubHandle: 'bradsavon'
+        },
+        {
+            name: 'Eddie Waked',
+            githubHandle: 'ebwaked'
+        }
+    ];
 
-  // Promise-based API
-  return {
-    loadAllUsers: function() {
-      // Simulate async nature of real remote calls
-      return $q.when(users);
-    }
-  };
+    // Promise-based API
+    return {
+        loadAllUsers: function() {
+            // Simulate async nature of real remote calls
+            return $q.when(users);
+        }
+    };
 }
 
 export default ['$q', UsersDataService];
-
