@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 using WebApi.Store;
 using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.Extensions.PlatformAbstractions;
-//using System.AppContext.BaseDirectory;
 
 namespace WebApi
 {
