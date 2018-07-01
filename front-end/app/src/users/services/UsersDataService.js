@@ -18,17 +18,38 @@ function UsersDataService($q) {
         {
             name: 'Brad Savon',
             githubHandle: 'bradsavon'
-        },
-        {
-            name: 'Eddie Waked',
-            githubHandle: 'ebwaked'
         }
+        // ,
+        // {
+        //     name: 'Eddie Waked',
+        //     githubHandle: 'ebwaked'
+        // }
     ];
 
     // Promise-based API
     return {
         loadAllUsers: function() {
             // Simulate async nature of real remote calls
+            console.log('User loadAll method called in service!');
+            return $q.when(users);
+        },
+
+        createUser: function(selected) {
+            // Simulate async nature of real remote calls
+            console.log('User create method called in service!');
+            console.log('selected info in service ' + selected);
+            return $q.when(users);
+        },
+
+        deleteUser: function() {
+            // Simulate async nature of real remote calls
+            console.log('User delete method called in service!');
+            return $q.when(users);
+        },
+
+        updateUser: function() {
+            // Simulate async nature of real remote calls
+            console.log('User update method called in service!');
             return $q.when(users);
         }
     };

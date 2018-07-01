@@ -1,0 +1,66 @@
+<md-dialog aria-label="Create New User">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Create New User {{newUser}}</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    X
+                    <md-icon aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <form name="userForm">
+                    <div layout-gt-sm="row">
+                        <md-list-item>
+                            <img ng-src="https://avatars.githubusercontent.com/{{$ctrl.selected.githubHandle}}" class="md-avatar input-avatar" />
+
+                            <md-input-container class="md-block" flex>
+                                <label>Name</label>
+                                <input ng-model="$ctrl.selected.name">
+                            </md-input-container>
+                            <md-input-container class="md-block" flex>
+                                <label>Github Handle</label>
+                                <input ng-model="$ctrl.selected.githubHandle">
+                            </md-input-container>
+                        </md-list-item>
+
+                    </div>
+                    <div layout-gt-sm="row">
+                        <md-list-item>
+                            <md-input-container class="md-block" flex>
+                                <label>Address</label>
+                                <input ng-model="$ctrl.selected.address">
+                            </md-input-container>
+                            <md-input-container class="md-block" flex>
+                                <label>City</label>
+                                <input ng-model="$ctrl.selected.city">
+                            </md-input-container>
+                            <md-input-container class="md-block" flex>
+                                <label>State</label>
+                                <input ng-model="$ctrl.selected.state">
+                            </md-input-container>
+                            <md-input-container class="md-block" flex>
+                                <label>Zip</label>
+                                <input ng-model="$ctrl.selected.zip">
+                            </md-input-container>
+                        </md-list-item>
+                    </div>
+                </form>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button ng-click="cancel()">
+                Cancel
+            </md-button>
+            <md-button ng-click="create($ctrl.selected)">
+                Create
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
