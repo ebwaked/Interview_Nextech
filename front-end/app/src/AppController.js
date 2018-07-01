@@ -76,8 +76,6 @@ function AppController(UsersDataService, $mdSidenav, $mdDialog) {
         };
     }
 
-    self.newUser = 'Eddie';
-
     // *********************************
     // External methods
     // *********************************
