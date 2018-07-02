@@ -19,6 +19,13 @@ namespace WebApi.Store
 
         public Task<IEnumerable<T>> Get<T>()
         {
+            // var list = new List<User>();
+            // list.Add(new User() {Id = "4", Name = "Eddie Waked", GithubHandle = "ebwaked"});
+            // return list;
+
+            // if (Contains(T)) {
+            //     return typeof<T>;
+            // }
             throw new NotImplementedException();
         }
 

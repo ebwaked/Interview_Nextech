@@ -6,7 +6,7 @@
  */
 
 
-function AppController(UsersDataService, $mdSidenav, $mdDialog) {
+function AppController(UsersDataService, $mdSidenav, $mdDialog, $http) {
     var self = this;
 
     self.selected = null;
@@ -17,6 +17,11 @@ function AppController(UsersDataService, $mdSidenav, $mdDialog) {
     self.deleteUser = deleteUser;
     self.updateUser = updateUser;
     self.showCreateUserModal = showCreateUserModal;
+
+    var apiUrl = 'http://localhost:50537/';
+
+    $http.defaults.useXDomain = true;
+
 
     // Load all registered users
 
@@ -66,28 +71,67 @@ function AppController(UsersDataService, $mdSidenav, $mdDialog) {
             $mdDialog.cancel();
         };
 
-        $scope.answer = function(answer) {
-            $mdDialog.hide(answer);
-        };
-
         $scope.create = function(selected) {
             self.createUser(selected);
             $mdDialog.hide();
         };
-    }
+    };
 
     // *********************************
     // External methods
     // *********************************
 
     function createUser(selected) {
-        UsersDataService
-            .createUser(selected)
-            // .then(function() {
-            //     self.selected = [].concat(selected);
-            // })
-            //console.log('selected var in appCtrler ' + selected);
-    }
+
+        var data = {
+            "id": self.users.length + 1,
+            "name": selected.name,
+            "githubHandle": selected.githubHandle,
+            "address": selected.address,
+            "city": selected.city,
+            "state": selected.state,
+            "zip": selected.state
+        };
+        self.users.push(data);
+        var dataForApi = {
+            //"Id": null,
+            "Name": selected.name,
+            "GithubHandle": selected.githubHandle,
+            "Address": selected.address,
+            "City": selected.city,
+            "State": selected.state,
+            "Zip": selected.state
+        };
+        $http.post(
+            apiUrl + 'api/Users',
+            JSON.stringify(dataForApi), {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
+            }
+        ).success(function(data) {
+            $scope.person = data;
+        });
+        // $http({
+        //         url: apiUrl + 'api/Users',
+        //         method: "POST",
+        //         data: data,
+        //         headers: {
+        //             'Accept': 'application/json',
+        //             'Content-Type': 'application/json'
+        //         },
+        //         withCredentials: false,
+        //     })
+        //     .then(function(response) {
+        //             // success
+        //             console.log('User has been created!');
+        //         },
+        //         function(response) { // optional
+        //             // failed
+        //             console.log('Create user failed');
+        //         })
+    };
 
     function deleteUser(id) {
         UsersDataService
@@ -96,7 +140,7 @@ function AppController(UsersDataService, $mdSidenav, $mdDialog) {
             //     self.userCreated = [].concat(userCreated);
             // })
         console.log('user ' + id + ' deleted');
-    }
+    };
 
     function updateUser(id) {
         UsersDataService
@@ -105,8 +149,8 @@ function AppController(UsersDataService, $mdSidenav, $mdDialog) {
             //     self.userCreated = [].concat(userCreated);
             // })
         console.log('user ' + id + ' updated');
-    }
+    };
 
 }
 
-export default ['UsersDataService', '$mdSidenav', '$mdDialog', AppController];
+export default ['UsersDataService', '$mdSidenav', '$mdDialog', '$http', AppController];

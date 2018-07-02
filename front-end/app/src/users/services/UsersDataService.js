@@ -4,20 +4,37 @@
  * remote data service call(s).
  *
  * @returns {{loadAll: Function}}
+ * @returns {{createUser: Function}}
  * @constructor
  */
+
 function UsersDataService($q) {
     var users = [{
+            id: '1',
             name: 'Juan Jaspe',
-            githubHandle: 'jjaspenextech'
+            githubHandle: 'jjaspenextech',
+            address: '110 Rally Rd.',
+            city: 'Tampa',
+            state: 'FL',
+            zip: '33607'
         },
         {
+            id: '2',
             name: 'Brandon Ripley',
-            githubHandle: 'bripley-nxtech'
+            githubHandle: 'bripley-nxtech',
+            address: '9112 Lois Ave.',
+            city: 'Tampa',
+            state: 'FL',
+            zip: '33607'
         },
         {
+            id: '3',
             name: 'Brad Savon',
-            githubHandle: 'bradsavon'
+            githubHandle: 'bradsavon',
+            address: '56113 Henderson Way',
+            city: 'Tampa',
+            state: 'FL',
+            zip: '33607'
         }
     ];
 
@@ -30,10 +47,11 @@ function UsersDataService($q) {
         },
 
         createUser: function(selected) {
-            // Simulate async nature of real remote calls
-            console.log('User create method called in service!');
-            console.log('selected info in service ' + selected);
-            return $q.when(users);
+            var obj = new Object();
+            obj.Id = '';
+            obj.Name = selected.name;
+            obj.GithubHandle = selected.githubHandle;
+            return $q.when(obj);
         },
 
         deleteUser: function() {
@@ -51,39 +69,3 @@ function UsersDataService($q) {
 }
 
 export default ['$q', UsersDataService];
-
-// const HTTP = new WeakMap();
-
-// class UsersService {
-//     constructor($http) {
-//         HTTP.set(this, $http);
-//     }
-
-//     getUsers() {
-//         return HTTP.get(this).get('/api/activeBooks').then(result => result.data);
-//     }
-
-//     getUserByID() {
-//         return HTTP.get(this).get('/api/archivedBooks').then(result => result.data);
-//     }
-
-//     createUser(userID, isBookRead) {
-//         return HTTP.get(this).put(`/api/markRead/${bookId}`, { bookId: bookId, read: isBookRead });
-//     }
-
-//     addToArchive(bookId) {
-//         return HTTP.get(this).put(`/api/addToArchive/${bookId}`, {});
-//     }
-
-//     checkIfBookExists(title) {
-//         return HTTP.get(this).get(`/api/bookExists/${title}`).then(result => result.data);
-//     }
-
-//     addBook(book) {
-//         return HTTP.get(this).post('/api/books', book);
-//     }
-
-//     static usersFactory($http) {
-//         return new usersService($http);
-//     }
-// }
