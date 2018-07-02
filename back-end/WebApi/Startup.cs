@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using WebApi.Store;
 using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.Extensions.PlatformAbstractions;
+using Microsoft.AspNetCore.Cors;
 
 namespace WebApi
 {
@@ -28,6 +29,28 @@ namespace WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            services.AddCors(options =>
+            {
+
+            options.AddPolicy("CORS",
+
+            corsPolicyBuilder => corsPolicyBuilder.AllowAnyOrigin()
+
+            // Apply CORS policy for any type of origin
+
+            .AllowAnyMethod()
+
+            // Apply CORS policy for any type of http methods
+
+            .AllowAnyHeader()
+
+            // Apply CORS policy for any headers
+
+            .AllowCredentials());
+
+            // Apply CORS policy for all users
+
+            });
             services.AddMvc();
 
             services.AddSwaggerGen(
@@ -68,6 +91,7 @@ namespace WebApi
 
             app.UseStaticFiles();
 
+            app.UseCors("CORS");  
             app.UseMvc();
             app.UseSwagger();
             app.UseSwaggerUI(

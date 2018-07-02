@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using WebApi.Store;
 using WebApi.Models;
 using System.Net;
+using Microsoft.AspNetCore.Cors;
 
 namespace WebApi.Controllers
 {
@@ -12,6 +13,7 @@ namespace WebApi.Controllers
     /// Users Controller
     /// </summary>
     [Route("api/[controller]")]
+    [EnableCors("CORS")]
     public class UsersController : Controller
     {
         private IDataStore UsersDataStore;
@@ -38,7 +40,12 @@ namespace WebApi.Controllers
         public async Task<IActionResult> Get()
         {
             // Implement
+            //var list = new List<User>();
+            //list.Add(new User() {Id = "4", Name = "Eddie Waked", GithubHandle = "ebwaked"});
 
+            //var getListTask = await Task.Run(() => Get(list));
+            //UsersDataStore.Get();
+            //return Ok(getListTask); 
             // Remove below when implemented
             await Task.Delay(1);
             return new StatusCodeResult((int)HttpStatusCode.MethodNotAllowed);
