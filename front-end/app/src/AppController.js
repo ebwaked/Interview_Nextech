@@ -19,6 +19,7 @@ function AppController(UsersDataService, $mdSidenav, $mdDialog, $http) {
     self.showCreateUserModal = showCreateUserModal;
     self.showDeleteUserModal = showDeleteUserModal;
     self.removeByKey = removeByKey;
+    self.updateByKey = updateByKey;
 
     var apiUrl = 'http://localhost:50537/';
 
@@ -172,6 +173,11 @@ function AppController(UsersDataService, $mdSidenav, $mdDialog, $http) {
     function updateUser(id) {
         // UsersDataService
         //     .updateUser(id)
+        var index = self.appSelected.id;
+        self.removeByKey(self.users, {
+            key: 'id',
+            value: index
+        });
         var data = {
             "id": self.users.length + 1,
             "name": selected.name,
@@ -182,7 +188,7 @@ function AppController(UsersDataService, $mdSidenav, $mdDialog, $http) {
             "zip": selected.state
         };
         self.users.push(data);
-        $http.post(
+        $http.put(
             apiUrl + 'api/Users/index',
             JSON.stringify(index), {
                 headers: {
@@ -194,6 +200,18 @@ function AppController(UsersDataService, $mdSidenav, $mdDialog, $http) {
         });
         console.log('user ' + id + ' updated');
     };
+
+    function updateByKey(array, params) {
+        array.some(function(item, index) {
+            if (array[index][params.key] === params.value) {
+                // found it!
+                array.splice(index, 1);
+                return true; // stops the loop
+            }
+            return false;
+        });
+        return array;
+    }
 
 }
 
