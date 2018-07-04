@@ -111,26 +111,8 @@ function AppController(UsersDataService, $mdSidenav, $mdDialog, $http) {
                 }
             }
         ).success(function(data) {
-            $scope.person = data;
+            self.users = data;
         });
-        // $http({
-        //         url: apiUrl + 'api/Users',
-        //         method: "POST",
-        //         data: data,
-        //         headers: {
-        //             'Accept': 'application/json',
-        //             'Content-Type': 'application/json'
-        //         },
-        //         withCredentials: false,
-        //     })
-        //     .then(function(response) {
-        //             // success
-        //             console.log('User has been created!');
-        //         },
-        //         function(response) { // optional
-        //             // failed
-        //             console.log('Create user failed');
-        //         })
     };
 
     function deleteUser(id) {
