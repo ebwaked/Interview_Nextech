@@ -52,6 +52,8 @@ namespace WebApi
 
             });
             services.AddMvc();
+            //services.AddSingleton(Configuration);
+            //services.AddSingleton<IConfiguration>(Configuration);
 
             services.AddSwaggerGen(
                 config =>
