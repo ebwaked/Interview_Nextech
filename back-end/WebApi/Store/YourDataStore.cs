@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using WebApi.Models;
+using System.Linq;
 
 namespace WebApi.Store
 {
@@ -22,11 +23,7 @@ namespace WebApi.Store
             try 
             {
                conn = new SqlConnection(connectionInfo);
-                    //conn.Open();
                     return Task.CompletedTask;
-                    // if (connection != null && connection.State == ConnectionState.Open) {
-                    //     return Task.CompletedTask;
-                    // }
             }
             catch 
             {
@@ -39,53 +36,58 @@ namespace WebApi.Store
 
         public Task Delete(string id)
         {
+            using (var context = new MyDbContext())
+            {
+                var toDelete = new User {Id = id };
+
+                context.Users.Attach(toDelete);
+                context.Users.Remove(toDelete);
+                context.SaveChanges();
+            }
             throw new NotImplementedException();
         }
 
         public Task<IEnumerable<T>> Get<T>()
         {
-            List<User> UserList = new List<User>();
-            Connect();
-            SqlDataReader reader;
-            conn.Open();
-            //create a command object identifying the stored procedure
-            SqlCommand cmd = new SqlCommand("GetAllUsers", conn);
-            //set the command object so it knows to execute a stored procedure
-            cmd.CommandType = CommandType.StoredProcedure;
-            //add parameter to command, which will be passed to the stored procedure
-            //cmd.Parameters.Add(new SqlParameter("@CustomerID", custId));
-            //Execute
-            reader = cmd.ExecuteReader();
-
-            if (reader != null & reader.HasRows)
+            using (var context = new MyDbContext())
             {
-                while (reader.Read())
+                var users = context.Users.ToList();
+                if (users != null) 
                 {
-                    User user = new User();
-                    user.Id = reader["Id"].ToString();
-                    user.Name = reader["Name"].ToString();
-                    user.GithubHandle = reader["GithubHandle"].ToString();
-                    user.Address = reader["Address"].ToString();
-                    user.City = reader["City"].ToString();
-                    user.State = reader["State"].ToString();
-                    user.Zip = reader["Zip"].ToString();
-                    UserList.Add(user);
+                    //return users; ### still getting errors because its not generic
+                    throw new System.ArgumentException("needs to be generic");
+                }
+                else
+                {
+                    throw new System.ArgumentException("Parameter cannot be null");
                 }
             }
-            Console.WriteLine("User List Returned: " + UserList);
-            conn.Close();
-            // TODO: Issues with returning correct type. Only way to compile without errors
-            throw new NotImplementedException();
-            //return Task.FromResult<IEnumerable<T>>(UserList);
         }
 
         public Task<T> Get<T>(string id)
         {
+            using (var context = new MyDbContext())
+            {
+                var user = context.Users.First(u => u.Id == id);
+                // return user ### return the generic type instead to get working 
+            }
             throw new NotImplementedException();
         }
 
         public Task<string> Insert<T>(T document)
         {
+            using (var context = new MyDbContext())
+            {
+                var users = context.Set<User>();
+                users.Add( new User { 
+                        Id = document.Id, 
+                        Name = document.Name
+                        } 
+                    );
+
+                db.SaveChanges();
+            }
+
             throw new NotImplementedException();
         }
 
