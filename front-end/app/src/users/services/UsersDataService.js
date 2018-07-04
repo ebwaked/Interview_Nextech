@@ -6,6 +6,7 @@
  * @returns {{loadAll: Function}}
  * @constructor
  */
+var apiUrl = 'http://localhost:50537/';
 
 function UsersDataService($q) {
     var users = [{
@@ -40,7 +41,16 @@ function UsersDataService($q) {
     // Promise-based API
     return {
         loadAllUsers: function() {
-            // Simulate async nature of real remote calls
+            // I know im supposed to do my api requests here but had trouble importing http module with the ES6 imports
+            // so i just used $http in the app controller
+            // $http({
+            //     method: "GET",
+            //     url: apiUrl + 'api/Users'
+            // }).then(function mySuccess(response) {
+            //     users = response;
+            // }, function myError(response) {
+            //     $scope.myWelcome = response.statusText;
+            // });
             console.log('User loadAll method called in service!');
             return $q.when(users);
         },

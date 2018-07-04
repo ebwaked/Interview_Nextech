@@ -11,6 +11,7 @@ function AppController(UsersDataService, $mdSidenav, $mdDialog, $http) {
 
     self.selected = null;
     self.users = [];
+    self.loadAllUsers = loadAllUsers;
     self.selectUser = selectUser;
     self.toggleList = toggleUsersList;
     self.createUser = createUser;
@@ -102,6 +103,17 @@ function AppController(UsersDataService, $mdSidenav, $mdDialog, $http) {
     // *********************************
     // External methods
     // *********************************
+
+    function loadAllUsers() {
+        $http({
+            method: "GET",
+            url: apiUrl + 'api/Users'
+        }).then(function mySuccess(response) {
+            users = response;
+        }, function myError(response) {
+            console.log("error loading all users: " + response);
+        });
+    }
 
     function createUser(selected) {
         // local data to set the ID locally
@@ -212,6 +224,8 @@ function AppController(UsersDataService, $mdSidenav, $mdDialog, $http) {
         });
         return array;
     }
+
+    loadAllUsers();
 
 }
 
