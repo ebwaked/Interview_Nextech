@@ -4,7 +4,6 @@
  * remote data service call(s).
  *
  * @returns {{loadAll: Function}}
- * @returns {{createUser: Function}}
  * @constructor
  */
 
