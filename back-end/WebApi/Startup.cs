@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using WebApi.Store;
 using Swashbuckle.AspNetCore.Swagger;
-using Microsoft.Extensions.PlatformAbstractions;
+//using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.AspNetCore.Cors;
 
 namespace WebApi
@@ -66,7 +66,7 @@ namespace WebApi
                         TermsOfService = "None"
                     });
 
-                    config.IncludeXmlComments(GetXmlCommentsPath());
+                    //config.IncludeXmlComments(GetXmlCommentsPath());
                     config.DescribeAllEnumsAsStrings();
                 }
             );
@@ -108,10 +108,10 @@ namespace WebApi
             );
         }
 
-        private string GetXmlCommentsPath()
-        {
-            var app = PlatformServices.Default.Application;
-            return System.IO.Path.Combine(app.ApplicationBasePath, $"{System.Reflection.Assembly.GetEntryAssembly().GetName().Name}.xml");
-        }
+        // private string GetXmlCommentsPath()
+        // {
+        //     var app = PlatformServices.Default.Application;
+        //     return System.IO.Path.Combine(app.ApplicationBasePath, $"{System.Reflection.Assembly.GetEntryAssembly().GetName().Name}.xml");
+        // }
     }
 }
