@@ -88,3 +88,10 @@ md-list-item img.input-avatar {
 .dialogdemoBasicUsage .dialog-demo-prerendered md-checkbox {
     margin-bottom: 0;
 }
+
+
+/* Delete Button CSS */
+
+.deleteUserButton {
+    color: red;
+}

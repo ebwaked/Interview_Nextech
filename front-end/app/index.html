@@ -30,6 +30,7 @@
         <md-sidenav class="md-whiteframe-4dp" md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left" ng-click="app.toggleList()">
             <!-- Custom UsersList component -->
             <md-button class="createUserButton bs3-block-button:default" ng-click="app.showCreateUserModal($event)">Create New User</md-button>
+            <md-button class="deleteUserButton bs3-block-button:default" ng-click="app.showDeleteUserModal($event, app.selected)">Delete Selected User</md-button>
             <users-list users="app.users" selected="app.selected" on-selected="app.selectUser(user)">
             </users-list>
         </md-sidenav>

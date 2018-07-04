@@ -47,10 +47,8 @@ function UsersDataService($q) {
         },
 
         createUser: function(selected) {
-            var obj = new Object();
-            obj.Id = '';
-            obj.Name = selected.name;
-            obj.GithubHandle = selected.githubHandle;
+            // Simulate async nature of real remote calls
+            console.log('User create method called in service!');
             return $q.when(obj);
         },
 
