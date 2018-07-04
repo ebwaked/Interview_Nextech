@@ -8,7 +8,7 @@
 	</Target>
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
     <ApplicationInsightsResourceId>/subscriptions/6e5593cf-4016-4628-ae26-e610f4f1e9b6/resourcegroups/person/providers/microsoft.insights/components/WebApi</ApplicationInsightsResourceId>
     <ApplicationInsightsAnnotationResourceId>/subscriptions/6e5593cf-4016-4628-ae26-e610f4f1e9b6/resourcegroups/person/providers/microsoft.insights/components/WebApi</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
