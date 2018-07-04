@@ -56,8 +56,8 @@ function AppController(UsersDataService, $mdSidenav, $mdDialog, $http) {
 
     function showCreateUserModal(ev) {
         $mdDialog.show({
-            controller: CreateUserController,
-            templateUrl: 'src/users/components/create/createDialog.tmpl.html',
+            controller: UserFunctionController,
+            templateUrl: 'src/users/components/dialogTemplates/createDialog.tmpl.html',
             parent: angular.element(document.body),
             targetEvent: ev,
             clickOutsideToClose: true,
@@ -70,8 +70,8 @@ function AppController(UsersDataService, $mdSidenav, $mdDialog, $http) {
     function showDeleteUserModal(ev, appSelected) {
         self.appSelected = appSelected;
         $mdDialog.show({
-            controller: CreateUserController,
-            templateUrl: 'src/users/components/create/deleteDialog.tmpl.html',
+            controller: UserFunctionController,
+            templateUrl: 'src/users/components/dialogTemplates/deleteDialog.tmpl.html',
             parent: angular.element(document.body),
             targetEvent: ev,
             clickOutsideToClose: true,
@@ -79,7 +79,7 @@ function AppController(UsersDataService, $mdSidenav, $mdDialog, $http) {
         })
     };
 
-    function CreateUserController($scope, $mdDialog) {
+    function UserFunctionController($scope, $mdDialog) {
         $scope.hide = function() {
             $mdDialog.hide();
         };
