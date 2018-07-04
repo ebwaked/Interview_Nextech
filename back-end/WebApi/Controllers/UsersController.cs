@@ -42,13 +42,14 @@ namespace WebApi.Controllers
             // Implement
             //var list = new List<User>();
             //list.Add(new User() {Id = "4", Name = "Eddie Waked", GithubHandle = "ebwaked"});
-
-            //var getListTask = await Task.Run(() => Get(list));
-            //UsersDataStore.Get();
+            
+            //var getListTask = await Task.Run(() => Get());
+            await UsersDataStore.Get<User>();
+            return new StatusCodeResult((int)HttpStatusCode.OK);
             //return Ok(getListTask); 
             // Remove below when implemented
-            await Task.Delay(1);
-            return new StatusCodeResult((int)HttpStatusCode.MethodNotAllowed);
+            //await Task.Delay(1);
+            //return new StatusCodeResult((int)HttpStatusCode.MethodNotAllowed);
         }
 
         /// <summary>

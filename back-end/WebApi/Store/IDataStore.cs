@@ -6,7 +6,7 @@ namespace WebApi.Store
 {
     public interface IDataStore
     {
-        Task Connect(string connectionInfo);
+        Task Connect();
         Task Delete(string id);
         Task<IEnumerable<T>> Get<T>();
         Task<T> Get<T>(string id);
