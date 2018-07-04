@@ -44,7 +44,6 @@ namespace WebApi.Store
 
         public Task<IEnumerable<T>> Get<T>()
         {
-            //List<User> UserList = new List<User>();
             List<User> UserList = new List<User>();
             Connect();
             SqlDataReader reader;
