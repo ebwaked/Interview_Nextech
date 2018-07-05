@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
 using WebApi.Models;
 using System.Linq;
 
@@ -78,14 +79,21 @@ namespace WebApi.Store
         {
             using (var context = new MyDbContext())
             {
-                var users = context.Set<User>();
-                users.Add( new User { 
-                        Id = document.Id, 
-                        Name = document.Name
-                        } 
-                    );
-
-                db.SaveChanges();
+                var dbName = context.Database.GetDbConnection().GetType().Name;
+                User newUser = new User();
+                newUser.Name = "Test Name";
+                newUser.GithubHandle = "ebwaked";
+                newUser.Address = "110 Davis St.";
+                newUser.City = "Kernersville";
+                newUser.State = "NC";
+                newUser.Zip = "27284";
+                if (newUser == null)
+                {
+                    //return;
+                }
+                //newUser = newUserParameter;
+                context.Users.Add(newUser);
+                context.SaveChanges();
             }
 
             throw new NotImplementedException();
@@ -93,11 +101,34 @@ namespace WebApi.Store
 
         public Task<IEnumerable<T>> Query<T>(string query)
         {
+            // ******** Not supported in Core 2.0 ********
+            // using (var context = new MyDbContext())
+            // {
+            //     var queryResult = context.Users.FromSql(query).FirstOrDefault();
+            // }
+            Connect();
+            //SqlDataReader reader;
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.CommandType = CommandType.Text;
+            conn.Open();
+            var result = cmd.ExecuteReader();
+            conn.Close();
             throw new NotImplementedException();
         }
 
         public Task Update<T>(T document)
         {
+            using (var context = new MyDbContext())
+            {
+                var entity = context.Users.Find(document);
+                if (entity == null)
+                {
+                    //return;
+                }
+
+                context.Users.Add(entity);
+                context.SaveChanges();
+            }
             throw new NotImplementedException();
         }
     }

@@ -62,11 +62,8 @@ namespace WebApi.Controllers
         [ProducesResponseType(typeof(NotFoundResult), (int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> Get([FromRoute] string id)
         {
-            // Implement
-
-            // Remove below when implemented
-            await Task.Delay(1);
-            return new StatusCodeResult((int)HttpStatusCode.MethodNotAllowed);
+            await UsersDataStore.Get<User>(id);
+            return new StatusCodeResult((int)HttpStatusCode.OK);
         }
         #endregion GET
 
@@ -95,11 +92,8 @@ namespace WebApi.Controllers
         [ProducesResponseType(typeof(BadRequestResult), (int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> Post([FromBody]User user)
         {
-            // Implement
-
-            // Remove below when implemented
-            await Task.Delay(1);
-            return new StatusCodeResult((int)HttpStatusCode.MethodNotAllowed);
+            await UsersDataStore.Insert(user);
+            return new StatusCodeResult((int)HttpStatusCode.OK);
         }
         #endregion POST
 
@@ -118,11 +112,8 @@ namespace WebApi.Controllers
         [ProducesResponseType(typeof(NotFoundResult), (int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> Put([FromRoute] string id, [FromBody]User user)
         {
-            // Implement
-
-            // Remove below when implemented
-            await Task.Delay(1);
-            return new StatusCodeResult((int)HttpStatusCode.MethodNotAllowed);
+            await UsersDataStore.Update<User>(user);
+            return new StatusCodeResult((int)HttpStatusCode.OK);
         }
 
         #region Utilities
@@ -147,11 +138,8 @@ namespace WebApi.Controllers
         [ProducesResponseType(typeof(NotFoundResult), (int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> Delete([FromRoute] string id)
         {
-            // Implement
-
-            // Remove below when implemented
-            await Task.Delay(1);
-            return new StatusCodeResult((int)HttpStatusCode.MethodNotAllowed);
+            await UsersDataStore.Delete(id);
+            return new StatusCodeResult((int)HttpStatusCode.OK);
         }
         #endregion DELETE
     }
