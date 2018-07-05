@@ -6,7 +6,7 @@
  * @returns {{loadAll: Function}}
  * @constructor
  */
-var apiUrl = 'http://localhost:50537/';
+var apiUrl = 'https://nextech-api.azurewebsites.net' // DEV 'http://localhost:50537/';
 
 function UsersDataService($q) {
     var users = [{
